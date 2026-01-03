@@ -1,0 +1,21 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .routes import auth, rooms, reservations
+
+app = FastAPI(title="Hotel Booking API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(auth.router)
+app.include_router(rooms.router)
+app.include_router(reservations.router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Hotel Booking API"}
