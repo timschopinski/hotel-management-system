@@ -1,6 +1,5 @@
-====================================================
-HOTEL BOOKING PLATFORM
-====================================================
+
+# HOTEL MANAGEMENT SYSTEM
 
 A simple hotel room reservation system focused on frontend functionality.
 This project was created as a university application project.
