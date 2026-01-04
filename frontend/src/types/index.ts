@@ -7,6 +7,8 @@ export interface User {
 export interface Room {
   id: number
   name: string
+  description?: string
+  image_url?: string
   owner_id: number
   created_at: string
 }
@@ -18,6 +20,7 @@ export interface Reservation {
   guest_email: string
   start_date: string
   end_date: string
+  notes?: string
   created_at: string
   room?: Room
 }
@@ -34,6 +37,14 @@ export interface RegisterCredentials {
 
 export interface CreateRoom {
   name: string
+  description?: string
+  image_url?: string
+}
+
+export interface UpdateRoom {
+  name?: string
+  description?: string
+  image_url?: string
 }
 
 export interface CreateReservation {
@@ -42,4 +53,9 @@ export interface CreateReservation {
   guest_email: string
   start_date: string
   end_date: string
+  notes?: string
+}
+
+export interface UpdateReservation {
+  notes?: string
 }

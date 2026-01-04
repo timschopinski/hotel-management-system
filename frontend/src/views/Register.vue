@@ -24,7 +24,7 @@ const handleRegister = async () => {
 
   try {
     await authStore.register({ email: email.value, password: password.value })
-    router.push('/login')
+    router.push('/admin/login')
   } catch (err: any) {
     error.value = err.response?.data?.detail || 'Registration failed'
   } finally {
@@ -37,7 +37,7 @@ const handleRegister = async () => {
   <div class="max-w-md mx-auto px-4 py-12">
     <div class="bg-white rounded-lg shadow-md p-8">
       <h1 class="text-3xl font-bold text-secondary-900 mb-6 text-center">
-        Register
+        Admin Register
       </h1>
 
       <form @submit.prevent="handleRegister" class="space-y-6">
@@ -95,7 +95,7 @@ const handleRegister = async () => {
 
       <p class="mt-6 text-center text-secondary-600">
         Already have an account?
-        <router-link to="/login" class="text-primary-600 hover:text-primary-700 font-medium">
+        <router-link to="/admin/login" class="text-primary-600 hover:text-primary-700 font-medium">
           Login
         </router-link>
       </p>

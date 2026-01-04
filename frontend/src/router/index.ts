@@ -16,17 +16,17 @@ const router = createRouter({
       component: Home
     },
     {
-      path: '/login',
+      path: '/admin/login',
       name: 'login',
       component: Login
     },
     {
-      path: '/register',
+      path: '/admin/register',
       name: 'register',
       component: Register
     },
     {
-      path: '/dashboard',
+      path: '/admin/dashboard',
       name: 'dashboard',
       component: Dashboard,
       meta: { requiresAuth: true }
@@ -37,7 +37,7 @@ const router = createRouter({
       component: RoomDetail
     },
     {
-      path: '/my-reservations',
+      path: '/admin/reservations',
       name: 'my-reservations',
       component: MyReservations,
       meta: { requiresAuth: true }
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.token) {
-    next('/login')
+    next('/admin/login')
   } else {
     next()
   }
