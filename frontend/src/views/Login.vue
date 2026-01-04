@@ -17,7 +17,7 @@ const handleLogin = async () => {
 
   try {
     await authStore.login({ email: email.value, password: password.value })
-    router.push('/dashboard')
+    router.push('/admin/dashboard')
   } catch (err: any) {
     error.value = err.response?.data?.detail || 'Login failed'
   } finally {
@@ -30,7 +30,7 @@ const handleLogin = async () => {
   <div class="max-w-md mx-auto px-4 py-12">
     <div class="bg-white rounded-lg shadow-md p-8">
       <h1 class="text-3xl font-bold text-secondary-900 mb-6 text-center">
-        Login
+        Admin Login
       </h1>
 
       <form @submit.prevent="handleLogin" class="space-y-6">
@@ -75,7 +75,7 @@ const handleLogin = async () => {
 
       <p class="mt-6 text-center text-secondary-600">
         Don't have an account?
-        <router-link to="/register" class="text-primary-600 hover:text-primary-700 font-medium">
+        <router-link to="/admin/register" class="text-primary-600 hover:text-primary-700 font-medium">
           Register
         </router-link>
       </p>

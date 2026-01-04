@@ -17,7 +17,7 @@ const handleLogout = () => {
       <div class="flex justify-between h-16">
         <div class="flex items-center">
           <router-link to="/" class="text-xl font-bold text-primary-600">
-            Hotel Booking
+            Grand Hotel
           </router-link>
         </div>
         <div class="flex items-center space-x-4">
@@ -29,16 +29,16 @@ const handleLogout = () => {
           </router-link>
           <template v-if="authStore.token">
             <router-link
-              to="/dashboard"
+              to="/admin/dashboard"
               class="text-secondary-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition"
             >
               Dashboard
             </router-link>
             <router-link
-              to="/my-reservations"
+              to="/admin/reservations"
               class="text-secondary-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition"
             >
-              My Reservations
+              Reservations
             </router-link>
             <button
               @click="handleLogout"
@@ -49,16 +49,10 @@ const handleLogout = () => {
           </template>
           <template v-else>
             <router-link
-              to="/login"
+              to="/admin/login"
               class="text-secondary-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition"
             >
-              Login
-            </router-link>
-            <router-link
-              to="/register"
-              class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition"
-            >
-              Register
+              Admin
             </router-link>
           </template>
         </div>
