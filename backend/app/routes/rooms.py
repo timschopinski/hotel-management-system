@@ -3,28 +3,37 @@ from sqlalchemy.orm import Session
 from typing import List
 from ..database import get_db
 from ..models import Room, User
-from ..schemas import RoomCreate, RoomResponse
+from ..schemas import RoomCreate, RoomUpdate, RoomResponse
 from ..auth import get_current_user
 
 router = APIRouter(prefix="/rooms", tags=["rooms"])
 
+
 @router.post("", response_model=RoomResponse)
 def create_room(room: RoomCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    new_room = Room(name=room.name, owner_id=current_user.id)
+    new_room = Room(
+        name=room.name,
+        description=room.description,
+        image_url=room.image_url,
+        owner_id=current_user.id
+    )
     db.add(new_room)
     db.commit()
     db.refresh(new_room)
     return new_room
+
 
 @router.get("", response_model=List[RoomResponse])
 def get_rooms(db: Session = Depends(get_db)):
     rooms = db.query(Room).all()
     return rooms
 
+
 @router.get("/my", response_model=List[RoomResponse])
 def get_my_rooms(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     rooms = db.query(Room).filter(Room.owner_id == current_user.id).all()
     return rooms
+
 
 @router.get("/{room_id}", response_model=RoomResponse)
 def get_room(room_id: int, db: Session = Depends(get_db)):
@@ -32,6 +41,26 @@ def get_room(room_id: int, db: Session = Depends(get_db)):
     if not room:
         raise HTTPException(status_code=404, detail="Room not found")
     return room
+
+
+@router.patch("/{room_id}", response_model=RoomResponse)
+def update_room(room_id: int, room_update: RoomUpdate, db: Session = Depends(get_db),
+                current_user: User = Depends(get_current_user)):
+    room = db.query(Room).filter(Room.id == room_id, Room.owner_id == current_user.id).first()
+    if not room:
+        raise HTTPException(status_code=404, detail="Room not found or unauthorized")
+
+    if room_update.name is not None:
+        room.name = room_update.name
+    if room_update.description is not None:
+        room.description = room_update.description
+    if room_update.image_url is not None:
+        room.image_url = room_update.image_url
+
+    db.commit()
+    db.refresh(room)
+    return room
+
 
 @router.delete("/{room_id}")
 def delete_room(room_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
