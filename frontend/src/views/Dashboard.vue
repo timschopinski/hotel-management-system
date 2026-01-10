@@ -183,7 +183,6 @@ onMounted(() => {
               <div class="flex-1">
                 <h3 class="font-semibold text-secondary-900 text-lg">{{ room.name }}</h3>
                 <p v-if="room.description" class="text-sm text-secondary-600 mt-1">{{ room.description }}</p>
-                <p class="text-xs text-secondary-500 mt-2">Room ID: {{ room.id }}</p>
               </div>
               <div class="flex gap-2">
                 <button

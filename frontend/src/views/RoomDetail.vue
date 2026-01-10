@@ -173,7 +173,6 @@ onMounted(() => {
               <div class="space-y-3 text-secondary-700">
                 <p><span class="font-semibold">Room Name:</span> {{ room.name }}</p>
                 <p v-if="room.description"><span class="font-semibold">Description:</span> {{ room.description }}</p>
-                <p><span class="font-semibold">Room ID:</span> {{ room.id }}</p>
               </div>
             </div>
 
